@@ -1,4 +1,5 @@
 import express from 'express';
+import 'dotenv/config'
 import morgan from 'morgan';
 import cors from 'cors';
 import authRoutes from './routes/auth.routes';
@@ -8,7 +9,7 @@ import cookieParser from 'cookie-parser'
 const app = express();
 
 //* Settings
-app.set('PORT', process.env.PORT || 3600);
+app.set('PORT', process.env.PORT);
 
 //* Global middlewares
 app.use(cookieParser())
