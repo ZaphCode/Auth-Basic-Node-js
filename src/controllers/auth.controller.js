@@ -10,6 +10,7 @@ export const register = async (req, res) => {
 		username: username,
 		email: email,
 		password: await encrypt(req.body.password),
+		role: 'user'
 	});
 
 	const [user, err] = await handleP(newUser.save());
