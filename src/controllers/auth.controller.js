@@ -65,11 +65,10 @@ export const authUser = async (req, res) => {
 };
 
 export const logout = async (req, res) => {
-	// const token = req.cookies['jwt'];
-	// if (!token) return res.status(400).json(handleErr(null, 'No token found'));
 
 	res.cookie('jwt', '', { maxAge: 0 });
 
 	return res.status(200).json({ status: 'success', msg: 'cookie deleted' });
 };
+
 

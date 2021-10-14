@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
+import User from '../models/User';
 import gConfig from '../utils/config';
-import { handleErr } from '../utils/functions';
+import { handleErr, handleP } from '../utils/functions';
 
 export const verifyToken = async (req, res, next) => {
 	const token = req.cookies['jwt'];
@@ -15,4 +16,18 @@ export const verifyToken = async (req, res, next) => {
 	} catch (error) {
 		return res.status(400).json(handleErr(error, 'Invalid token'));
 	}
+};
+
+export const verifyRole = (role) => async (req, res, next) => {
+	const userId = req.userId;
+
+	const [user, err] = await handleP(User.findById(userId));
+
+	if (!user || err)
+		return res.status(400).json(handleErr(err, 'Error Searching the user'));
+
+	if (user.role !== role && user.role !== 'admin')
+		return res.status(400).json(handleErr(null, "You don't have permissions"));
+
+	return next();
 };

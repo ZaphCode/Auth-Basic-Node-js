@@ -3,7 +3,7 @@ import validation from '../middlewares/validation'
 import registerSchema from '../validations/registerSchema'
 import loginSchema from '../validations/loginSchema'
 import * as authCtrl from '../controllers/auth.controller';
-import { verifyToken } from "../middlewares/authJWT";
+import { verifyToken, verifyRole} from "../middlewares/authJWT";
 import checkDuplicate from '../middlewares/checkDuplicate'
 
 const router = Router();
